@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andromeda Insurance — Protection as Vast as the Universe</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-orb {
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55vw;
+    height: 55vw;
+    max-width: 800px;
+    max-height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 40%,
+      rgba(201,168,76,0.12) 0%,
+      rgba(26,53,96,0.4) 40%,
+      rgba(10,22,40,0) 70%);
+    border: 1px solid rgba(201,168,76,0.1);
+    animation: pulseOrb 6s ease-in-out infinite;
+  }
+
+  .hero-orb::before {
+    content: '';
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+    animation: rotate 20s linear infinite;
+  }
+
+  .hero-orb::after {
+    content: '';
+    position: absolute;
+    inset: 25%;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+    background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+    animation: rotate 15s linear infinite reverse;
+  }
+
+  @keyframes pulseOrb {
+    0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-52%) scale(1.03); opacity: 1; }
+  }
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 640px; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--silver);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    max-width: 500px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(168,184,204,0.15);
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  .stat-item strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-item span {
+    font-size: 0.78rem;
+    color: var(--silver);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SERVICES */
+  .services {
+    position: relative;
+    padding: 7rem 4rem;
+    z-index: 1;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.08);
+    margin-top: 1rem;
+  }
+
+  .service-card {
+    background: var(--navy);
+    padding: 2.5rem;
+    cursor: pointer;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover {
+    background: var(--deep);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    z-index: 2;
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    transition: all 0.4s;
+  }
+
+  .service-card:hover .service-icon {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--accent);
+  }
+
+  .service-num {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    transition: color 0.4s;
+  }
+  .service-card:hover .service-num { color: rgba(201,168,76,0.12); }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-arrow {
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s;
+    display: block;
+  }
+  .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
+
+  /* WHY US */
+  .why-us {
+    position: relative;
+    padding: 7rem 4rem;
+    background: var(--deep);
+    z-index: 1;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .why-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .why-feature {
+    padding: 1.8rem;
+    background: rgba(10,22,40,0.5);
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: border-color 0.3s;
+  }
+  .why-feature:hover { border-color: rgba(201,168,76,0.3); }
+
+  .why-feature-icon { font-size: 1.6rem; margin-bottom: 0.9rem; }
+
+  .why-feature h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .why-feature p { font-size: 0.82rem; color: var(--silver); line-height: 1.65; font-weight: 300; }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 7rem 4rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testimonial-card {
+    background: var(--deep);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: rgba(201,168,76,0.15);
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    line-height: 1;
+  }
+
+  .testimonial-text {
+    font-size: 0.88rem;
+    color: var(--silver);
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author strong {
+    display: block;
+    color: var(--white);
+    font-size: 0.85rem;
+  }
+  .testimonial-author span {
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+
+  .stars { color: var(--accent); font-size: 0.8rem; margin-bottom: 0.75rem; }
+
+  /* CTA */
+  .cta-section {
+    padding: 6rem 4rem;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 4rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: linear-gradient(135deg, rgba(26,53,96,0.3) 0%, rgba(10,22,40,0.6) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  }
+
+  .cta-inner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-inner p {
+    color: var(--silver);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; position: relative; }
+
+  /* CONTACT */
+  .contact {
+    padding: 7rem 4rem;
+    z-index: 1;
+    position: relative;
+    background: var(--deep);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-detail-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .contact-detail-text strong { display: block; color: var(--white); font-size: 0.85rem; margin-bottom: 0.2rem; }
+  .contact-detail-text span { color: var(--silver); font-size: 0.82rem; font-weight: 300; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 8rem 2rem 4rem; }
+    .services { padding: 5rem 2rem; }
+    .why-us, .testimonials, .contact, .cta-section { padding-left: 2rem; padding-right: 2rem; }
+    .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Andromeda<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why-us">About Us</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ Trusted Insurance Partner Since 2004</div>
+    <h1>Protection<br>as <em>vast</em> as<br>the universe</h1>
+    <p>Andromeda Insurance delivers comprehensive coverage solutions for individuals, families, and businesses — securing your world against the unexpected with over two decades of trust.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Explore Coverage</a>
+      <a href="#contact" class="btn-outline">Get a Free Quote</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><strong>20+</strong><span>Years of Trust</span></div>
+      <div class="stat-item"><strong>50K+</strong><span>Policies Issued</span></div>
+      <div class="stat-item"><strong>98%</strong><span>Claims Settled</span></div>
+      <div class="stat-item"><strong>10</strong><span>Insurance Types</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="reveal">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Comprehensive<br>Insurance Solutions</h2>
+    <p class="section-sub">Click any coverage type below to explore your options, plans, and pricing tailored to your specific needs.</p>
+  </div>
+
+  <div class="services-grid reveal">
+    <a href="pages/life-insurance.html" class="service-card">
+      <span class="service-num">01</span>
+      <div class="service-icon">🫀</div>
+      <h3>Life Insurance</h3>
+      <p>Secure your family's financial future with flexible life coverage plans tailored to every life stage.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/health-insurance.html" class="service-card">
+      <span class="service-num">02</span>
+      <div class="service-icon">🏥</div>
+      <h3>Health Insurance</h3>
+      <p>Comprehensive health plans covering hospitalization, outpatient care, and critical illness.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/motor-insurance.html" class="service-card">
+      <span class="service-num">03</span>
+      <div class="service-icon">🚗</div>
+      <h3>Motor Insurance</h3>
+      <p>Full coverage for your vehicles — from third-party liability to comprehensive policies.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/property-insurance.html" class="service-card">
+      <span class="service-num">04</span>
+      <div class="service-icon">🏠</div>
+      <h3>Property Insurance</h3>
+      <p>Protect your home and commercial properties from fire, theft, and natural disasters.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/travel-insurance.html" class="service-card">
+      <span class="service-num">05</span>
+      <div class="service-icon">✈️</div>
+      <h3>Travel Insurance</h3>
+      <p>Journey with confidence. Coverage for cancellations, medical emergencies, and lost baggage.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/agriculture-insurance.html" class="service-card">
+      <span class="service-num">06</span>
+      <div class="service-icon">🌾</div>
+      <h3>Agriculture Insurance</h3>
+      <p>Protect crops, livestock, and farm equipment against climate risks and unforeseen events.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/marine-insurance.html" class="service-card">
+      <span class="service-num">07</span>
+      <div class="service-icon">⚓</div>
+      <h3>Marine Insurance</h3>
+      <p>Specialized coverage for cargo, vessels, and marine liability across waterways.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/business-insurance.html" class="service-card">
+      <span class="service-num">08</span>
+      <div class="service-icon">🏢</div>
+      <h3>Business / Liability</h3>
+      <p>Comprehensive business protection including public liability and professional indemnity.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/engineering-insurance.html" class="service-card">
+      <span class="service-num">09</span>
+      <div class="service-icon">⚙️</div>
+      <h3>Engineering Insurance</h3>
+      <p>Coverage for construction projects, machinery breakdown, and electronic equipment.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+
+    <a href="pages/miscellaneous-insurance.html" class="service-card">
+      <span class="service-num">10</span>
+      <div class="service-icon">🔐</div>
+      <h3>Miscellaneous Insurance</h3>
+      <p>Tailored policies for unique and specialized needs not covered under standard categories.</p>
+      <span class="service-arrow">Explore Plans →</span>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY US -->
+<section class="why-us" id="why-us">
+  <div class="why-grid">
+    <div class="reveal">
+      <div class="section-label">Why Andromeda</div>
+      <h2 class="section-title">Built on Trust,<br>Driven by<br><em style="font-style:italic;color:var(--accent)">Excellence</em></h2>
+      <p class="section-sub">We combine decades of industry expertise with a personal commitment to every policyholder — because your protection is our purpose.</p>
+      <a href="#contact" class="btn-primary">Talk to an Advisor</a>
+    </div>
+    <div class="why-features reveal">
+      <div class="why-feature">
+        <div class="why-feature-icon">🛡️</div>
+        <h4>Comprehensive Coverage</h4>
+        <p>Wide-ranging policies designed to leave no gap in your protection — personal or commercial.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">⚡</div>
+        <h4>Fast Claims Processing</h4>
+        <p>Streamlined claims with dedicated handlers ensuring rapid, fair settlements every time.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">🤝</div>
+        <h4>Expert Advisors</h4>
+        <p>Licensed professionals guide you to the right coverage at the best possible value.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">📊</div>
+        <h4>Financially Stable</h4>
+        <p>Backed by leading reinsurers with strong financial ratings for your peace of mind.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">🌐</div>
+        <h4>Nationwide Coverage</h4>
+        <p>Serving clients across the country with a network of branches and online services.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">📱</div>
+        <h4>24/7 Support</h4>
+        <p>Round-the-clock assistance for claims, queries, and emergency support whenever you need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="reveal">
+    <div class="section-label">Client Stories</div>
+    <h2 class="section-title">Trusted by Thousands</h2>
+    <p class="section-sub">Real experiences from our valued policyholders across the country.</p>
+  </div>
+  <div class="testimonials-grid reveal">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Andromeda's life insurance team was incredibly helpful in finding the right plan for my family. When we needed to make a claim, the process was seamless and stress-free.</p>
+      <div class="testimonial-author"><strong>James Mwangi</strong><span>Life Insurance Client, Nairobi</span></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">After my vehicle was involved in an accident, Andromeda processed my motor insurance claim within 48 hours. I couldn't believe how efficient and professional the entire team was.</p>
+      <div class="testimonial-author"><strong>Sarah Okonkwo</strong><span>Motor Insurance Client, Lagos</span></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Our business has been protected by Andromeda's liability insurance for 8 years. Their coverage is comprehensive and their advisors are always available when we need guidance.</p>
+      <div class="testimonial-author"><strong>David Kamau</strong><span>Business Insurance Client, Mombasa</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <h2>Ready to get protected?</h2>
+    <p>Speak with one of our insurance specialists today and find the perfect coverage solution tailored to your unique needs.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn-primary">Request a Free Quote</a>
+      <a href="tel:+254700000000" class="btn-outline">📞 Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">We're here<br>to help you</h2>
+      <p class="section-sub" style="margin-bottom:2.5rem;">Our specialists are ready to answer your questions and find the right coverage for your needs.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text"><strong>Head Office</strong><span>123 Galaxy Tower, Business District<br>Nairobi, Kenya</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text"><strong>Phone</strong><span>+254 700 000 000</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div class="contact-detail-text"><strong>Email</strong><span>info@andromedainsurance.com</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🕐</div>
+        <div class="contact-detail-text"><strong>Business Hours</strong><span>Mon – Fri: 8:00 AM – 6:00 PM<br>Sat: 9:00 AM – 1:00 PM</span></div>
+      </div>
+    </div>
+    <form class="quote-form reveal" style="background:rgba(13,31,60,0.6);border:1px solid rgba(201,168,76,0.15);padding:2.5rem;border-radius:2px;">
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="John" required></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" placeholder="john@example.com" required></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="+254 700 000 000"></div>
+      </div>
+      <div class="form-group">
+        <label>Insurance Type</label>
+        <select>
+          <option value="">Select an insurance type...</option>
+          <option>Life Insurance</option>
+          <option>Health Insurance</option>
+          <option>Motor Insurance</option>
+          <option>Property Insurance</option>
+          <option>Travel Insurance</option>
+          <option>Agriculture Insurance</option>
+          <option>Marine Insurance</option>
+          <option>Business / Liability Insurance</option>
+          <option>Engineering Insurance</option>
+          <option>Miscellaneous Insurance</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your insurance needs..." style="min-height:110px;"></textarea></div>
+      <button type="submit" class="btn-primary" style="align-self:flex-start;">Send Enquiry →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Andromeda<span>.</span></div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why-us">About</a></li>
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Andromeda Insurance. All rights reserved.</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  window.addEventListener('scroll', () => {
+    const orb = document.querySelector('.hero-orb');
+    if (orb) orb.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.12}px))`;
+  });
+</script>
+</body>
+</html>
